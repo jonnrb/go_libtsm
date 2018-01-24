@@ -109,3 +109,19 @@ func (vte *VTE) Input(utf8 []byte) {
 func (vte *VTE) HandleKeyboard(keysym, ascii uint32, mods KeyboardModifierSet, unicode uint32) bool {
 	return bool(C.tsm_vte_handle_keyboard(vte.vte, C.uint32_t(keysym), C.uint32_t(ascii), C.uint(mods), C.uint32_t(unicode)))
 }
+
+func (s KeyboardModifierSet) HasFlag(flag KeyboardModifier) bool {
+	return s&KeyboardModifierSet(flag) != 0
+}
+
+func (s *KeyboardModifierSet) AddFlag(flag KeyboardModifier) {
+	*s |= KeyboardModifierSet(flag)
+}
+
+func (s *KeyboardModifierSet) ClearFlag(flag KeyboardModifier) {
+	*s &= ^KeyboardModifierSet(flag)
+}
+
+func (s *KeyboardModifierSet) ToggleFlag(flag KeyboardModifier) {
+	*s ^= KeyboardModifierSet(flag)
+}
