@@ -1,3 +1,4 @@
+LIBTSM_BUILD_FILE = """
 package(default_visibility = ["//visibility:private"])
 
 cc_library(
@@ -35,7 +36,7 @@ cc_library(
     srcs = ["external/wcwidth.c"],
 )
 
-CONFIG_FILE = r"""
+CONFIG_FILE = r\"\"\"
 /* config.h.  Generated from config.h.in by configure.  */
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
@@ -150,10 +151,11 @@ CONFIG_FILE = r"""
 
 /* Define to 1 if you need to in order for 'stat' and other things to work. */
 /* #undef _POSIX_SOURCE */
-"""
+\"\"\"
 
 genrule(
     name = "gen_config",
     outs = ["config.h"],
     cmd = "cat > $(location :config.h) << EOF" + CONFIG_FILE + "EOF",
 )
+"""
