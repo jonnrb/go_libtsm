@@ -280,6 +280,7 @@ func (s *Screen) SelectionCopy() (string, error) {
 func (s *Screen) Draw(cb ScreenDrawCallback) Age {
 	ticket := insertScreenDrawCb(cb)
 	age := C.go_call_screen_draw(s.s, C.uint64_t(ticket))
+	deleteScreenDrawCb(ticket)
 	return Age(age)
 }
 

@@ -43,8 +43,11 @@ func insertScreenDrawCb(cb ScreenDrawCallback) screenDrawCbTicket {
 func getScreenDrawCb(ticket screenDrawCbTicket) ScreenDrawCallback {
 	screenDrawMu.Lock()
 	defer screenDrawMu.Unlock()
+	return screenDrawMap[ticket]
+}
 
-	cb := screenDrawMap[ticket]
+func deleteScreenDrawCb(ticket screenDrawCbTicket) {
+	screenDrawMu.Lock()
+	defer screenDrawMu.Unlock()
 	delete(screenDrawMap, ticket)
-	return cb
 }
