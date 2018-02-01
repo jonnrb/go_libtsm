@@ -1,4 +1,4 @@
-workspace(name = "jonnrb_go_libtsm")
+workspace(name = "com_github_jonnrb_go_libtsm")
 
 load("//bazel:deps.bzl", "jonnrb_go_libtsm_dependencies")
 
